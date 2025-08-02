@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF--8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI | Clients</title>
-    <link rel="stylesheet" href="clients.css" />
+    
+    <!--
+      FINAL FIX: This is the complete Content Security Policy.
+      It allows inline scripts, eval, Font Awesome, and data URLs for images.
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                   script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
+                   style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; 
+                   font-src 'self' https://cdnjs.cloudflare.com;
+                   img-src 'self' data:;
+                   object-src 'none';"> -->
+
+    <title>AI | Licenses</title>
+    <link rel="stylesheet" href="licenses.css" />
     <script src="script.js" defer></script>
     <link
       rel="stylesheet"
@@ -44,57 +57,111 @@
           <h1>Licenses</h1>
         </div>
       </section>
+
+      <!-- New Licenses Section UI -->
+      <section class="licenses-section">
+        <div class="licenses-controls">
+          <div class="filter-container">
+            <label for="year-filter">Filter by Financial Year:</label>
+            <select id="year-filter">
+              <option value="all">All Years</option>
+              <option value="23-24">23-24</option>
+              <option value="24-25">24-25</option>
+              <option value="25-26">25-26</option>
+            </select>
+          </div>
+          <button id="upload-btn" class="btn">Upload New File</button>
+        </div>
+
+        <div id="licenses-grid" class="licenses-grid">
+          <!-- License cards will be dynamically inserted here by JavaScript -->
+        </div>
+      </section>
     </main>
 
-    <footer class="footer">
-      <div class="containers">
-        <div class="footer-column">
-          <h4>Main Links</h4>
-          <ul>
-            <li><a href="index.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="licenses.html">Licenses</a></li>
-            <li><a href="clients.html">Clients</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contacts</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>Companies</h4>
-          <ul>
-            <li><a href="AICL.html">AICL</a></li>
-            <li><a href="AISL.html">AISL</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>Connect us on</h4>
-          <ul class="social-links">
-            <li>
-              <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-            </li>
-            <li>
-              <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-            </li>
-            <li>
-              <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-            </li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>Locate Us</h4>
-          <p>R-21, 2nd Floor Capital Shoppers Nakawa, Kampala, Uganda, E.A.</p>
-          <br />
-          <p>
-            R-5, 4 Floor Capital Shoppers Nakawa, Plot No. 1-3, P.O.Box 11230
-          </p>
-        </div>
+    <!-- Upload Modal -->
+    <div id="upload-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="close-upload-modal">×</span>
+        <h2>Upload New License</h2>
+        <form id="upload-form">
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="Enter your authorized email" required />
+          </div>
+          <div class="form-group">
+            <label for="financial-year">Financial Year</label>
+            <select id="financial-year" required>
+              <option value="23-24">23-24</option>
+              <option value="24-25">24-25</option>
+              <option value="25-26">25-26</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filename">File Name</label>
+            <input type="text" id="filename" placeholder="e.g., Trading License" required />
+          </div>
+          <div class="form-group">
+            <label for="document-upload">Upload Document</label>
+            <input type="file" id="document-upload" accept="image/*,application/pdf" required />
+          </div>
+          <button type="submit" class="btn">Submit</button>
+        </form>
       </div>
-    </footer>
+    </div>
 
-    <!-- Font Awesome CDN for social media icons -->
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
+    <!-- Lightbox Modal for viewing document -->
+    <div id="lightbox-modal" class="modal">
+      <span class="close-btn" id="close-lightbox-modal">×</span>
+      <div class="modal-content lightbox-content">
+        <img id="lightbox-img" src="" alt="License Document" />
+      </div>
+    </div>
+
+    <footer class="footer">
+        <!-- Your existing footer content -->
+        <div class="containers">
+          <div class="footer-column">
+            <h4>Main Links</h4>
+            <ul>
+              <li><a href="index.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="licenses.html">Licenses</a></li>
+              <li><a href="clients.html">Clients</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="contact.html">Contacts</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Companies</h4>
+            <ul>
+              <li><a href="AICL.html">AICL</a></li>
+              <li><a href="AISL.html">AISL</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Connect us on</h4>
+            <ul class="social-links">
+              <li>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Locate Us</h4>
+            <p>R-21, 2nd Floor Capital Shoppers Nakawa, Kampala, Uganda, E.A.</p>
+            <br />
+            <p>
+              R-5, 4 Floor Capital Shoppers Nakawa, Plot No. 1-3, P.O.Box 11230
+            </p>
+          </div>
+        </div>
+      </footer>
   </body>
 </html>
